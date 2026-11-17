@@ -1,0 +1,15 @@
+target/
+node_modules/
+dist/
+/storage/
+.vscode/
+.idea/
+.DS_Store
+.env
+.env.*
+!.env.example
+application-local.properties
+*.log
+*.pem
+*.key
+*.p12

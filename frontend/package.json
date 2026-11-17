@@ -1,0 +1,10 @@
+{
+  "name": "airuike-blog",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {"dev": "vite", "build": "vite build", "preview": "vite preview", "lint": "eslint src"},
+  "dependencies": {"vue": "3.5.43", "vue-router": "4.6.4", "pinia": "3.0.4", "axios": "1.20.0", "element-plus": "2.14.7", "md-editor-v3": "7.1.0", "marked": "18.0.14", "dompurify": "3.4.16", "highlight.js": "11.11.1"},
+  "devDependencies": {"vite": "8.2.2", "@vitejs/plugin-vue": "6.0.8", "eslint": "10.10.0", "eslint-plugin-vue": "10.11.0", "vue-eslint-parser": "10.4.1", "globals": "17.12.0"},
+  "engines": {"node": "^22.18.0 || >=24.12.0"}
+}

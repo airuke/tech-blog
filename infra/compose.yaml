@@ -1,0 +1,36 @@
+name: airuke-tech-blog
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?required}
+      MYSQL_DATABASE: blog
+      MYSQL_USER: blog_admin
+      MYSQL_PASSWORD: ${BLOG_DB_PASSWORD:?required}
+    ports:
+      - '127.0.0.1:3307:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_0900_ai_ci']
+    healthcheck:
+      test: ['CMD-SHELL', 'MYSQL_PWD="$${MYSQL_PASSWORD}" mysql -h 127.0.0.1 -u "$${MYSQL_USER}" "$${MYSQL_DATABASE}" -e "SELECT 1"']
+      interval: 5s
+      timeout: 5s
+      retries: 35
+  redis:
+    image: redis:7.4
+    restart: unless-stopped
+    command: ['redis-server', '--appendonly', 'yes', '--requirepass', '${BLOG_REDIS_PASSWORD:?required}']
+    ports:
+      - '127.0.0.1:6380:6379'
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'REDISCLI_AUTH="${BLOG_REDIS_PASSWORD}" redis-cli ping | grep -q PONG']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+volumes:
+  mysql-data:
+  redis-data:
